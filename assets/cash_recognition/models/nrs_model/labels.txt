@@ -1,8 +1,8 @@
-0 10
-1 10
-2 100
-3 20
-4 20
-5 200
-6 5
-7 50
+0 ten
+1 twenty
+2 five
+3 new ten
+4 new twenty
+5 fifty
+6 hundred
+7 twoHundred

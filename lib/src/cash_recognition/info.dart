@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:money_reader/src/utils/media_player.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:money_reader/src/utils/colors.dart';
 
 // Instructions and their corresponding audio feedbacks
@@ -27,13 +26,10 @@ class InstructionPageState extends State<InstructionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(
+          title: const Center(
             child: Text(
               "INFORMATION",
-              style: GoogleFonts.poppins(
-                textStyle:
-                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 25),
-              ),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),
             ),
           ),
           backgroundColor: appBarBgColor,

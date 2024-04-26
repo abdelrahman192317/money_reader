@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:money_reader/src/db/database_helper.dart';
 import 'package:money_reader/src/cash_recognition/models/note_model.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:money_reader/src/utils/colors.dart';
 
@@ -72,13 +71,11 @@ class HistoryScreenState extends State<HistoryScreen> {
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60.0),
           child: AppBar(
-            title: Center(
+            title: const Center(
               child: Text(
                 "HISTORY",
-                style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                style: TextStyle(
                       fontWeight: FontWeight.w600, fontSize: 25),
-                ),
               ),
             ),
             backgroundColor: appBarBgColor,
@@ -175,12 +172,11 @@ class HistoryScreenState extends State<HistoryScreen> {
                                               'Rs. ${currentNote?.value.toString()}',
                                               semanticsLabel:
                                                   "${currentNote?.label} rupees",
-                                              style: GoogleFonts.poppins(
-                                                  textStyle: TextStyle(
+                                              style: TextStyle(
                                                       color: defaultTextColor,
                                                       fontSize: 35,
                                                       fontWeight:
-                                                          FontWeight.w400)),
+                                                          FontWeight.w400),
                                             ))),
                                     Align(
                                         alignment: Alignment.centerRight,
