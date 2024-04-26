@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:money_reader/src/utils/flash_mode_toggler.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
@@ -22,20 +20,8 @@ class CameraAppState extends State<CameraApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    FlashModeToggler.initialize;
-    initCamera().then((value) {
-      if (Platform.isAndroid) {
-        FlashModeToggler.flashSubscription.onData(activateFlashModeToggler);
-      }
-    });
+    initCamera();
     WidgetsBinding.instance.addObserver(this);
-  }
-
-  activateFlashModeToggler(event) {
-    print('called');
-    if (isCameraReady) {
-      _controller.setFlashMode(event);
-    }
   }
 
   @override

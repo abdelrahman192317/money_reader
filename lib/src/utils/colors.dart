@@ -14,7 +14,7 @@ Color infobgColor = Colors.white;
 
 Color fiftyColor = const Color(0xFF006064);
 Color fiveColor = const Color(0xFFF485B1);
-Color fivehundredColor = const Color(0xFFE0E0E0);
+Color twoHundredColor = const Color(0xFFE0E0E0);
 Color hundredColor = const Color(0xFF388E3C);
 Color tenColor = const Color(0xFF000000);
 Color thousandColor = const Color(0xFF757575);

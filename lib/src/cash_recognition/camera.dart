@@ -23,7 +23,7 @@ class CashCameraState extends CameraAppState {
               onTap: captureAndClassify,
               child: Tooltip(
                   // add Tooltip for screen readers
-                  message: "Double Tap to Identify Note",
+                  message: "اضغط مرتين لمعرفة العملة",
                   child: cameraWidget(context)));
         } else {
           return const Center(
@@ -40,7 +40,7 @@ class CashCameraState extends CameraAppState {
       String path = await captureImage();
       classifyImage(path);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 }

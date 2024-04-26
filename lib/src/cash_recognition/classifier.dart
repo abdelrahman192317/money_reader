@@ -1,14 +1,11 @@
-import 'package:money_reader/src/utils/haptic_feedback.dart';
-//import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'dart:async';
-import 'package:money_reader/src/utils/media_player.dart';
-import 'package:money_reader/src/cash_recognition/models/note_model.dart';
-import 'package:money_reader/src/db/database_helper.dart';
+import 'package:flutter/material.dart';
+//import 'package:money_reader/src/utils/media_player.dart';
 import 'package:tflite/tflite.dart';
 
-String audiofile = "cash_recognition/audio/nrs_audio/";
-String _modelPath = "assets/cash_recognition/models/nrs_model/model.tflite";
-String _labelPath = "assets/cash_recognition/models/nrs_model/labels.txt";
+String audioFile = "cash_recognition/audio/";
+String _modelPath = "assets/cash_recognition/model/model.tflite";
+String _labelPath = "assets/cash_recognition/model/labels.txt";
 
 Future<void> classifyImage(String imagePath) async {
   /// Classify the given image
@@ -24,27 +21,25 @@ Future<void> classifyImage(String imagePath) async {
       imageStd: 1.0,
       asynch: true));
   // Add classified note to database and play the corresponding audio feedback
-  if (output != null && output.isNotEmpty) {
+  if (output!.isNotEmpty) {
+    print('here');
     String result = output[0]["label"];
-    // print(result + ' ' + output[0]["confidence"].toString());
+    debugPrint('$result ${output[0]["confidence"]}');
     String note = result.substring(2);
-    Note noteObj = Note(label: note);
-    await DatabaseHelper.instance.insert(noteObj);
     playAudio(note);
-    if(HapticFeedback.canVibrate){
-      //Vibrate.feedback(FeedbackType.success);
-    }
+    print(note);
   }
   // else play [wrong.mp3]
   else {
-    await MediaPlayer.playAudio('${audiofile}wrong.mp3');
-    if(HapticFeedback.canVibrate){
-      //Vibrate.feedback(FeedbackType.error);
-    }
+    //await MediaPlayer.playAudio('${audioFile}wrong.mp3');
+    // if(HapticFeedback.canVibrate){
+    //   Vibrate.feedback(FeedbackType.error);
+    // }
   }
 }
 
 Future<void> playAudio(String note) async {
   // play an audio feedback corresponding the classified note
-  await MediaPlayer.playAudio('$audiofile$note.mp3');
+  if(note.split(' ')[0] == 'new')note = note.split(' ')[1];
+  //await MediaPlayer.playAudio('$audioFile$note.mp3');
 }
