@@ -1,40 +1,37 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+
+import 'global.dart';
 
 class CameraApp extends StatefulWidget {
   const CameraApp({super.key});
 
-  /// A Camera Widget that can be reused for different components
-  ///
-  /// To add more features for a component, inherit and override this class
   @override
   CameraAppState createState() => CameraAppState();
 }
 
 class CameraAppState extends State<CameraApp> with WidgetsBindingObserver {
-  late CameraController _controller;
+  //late CameraController _controller;
   Future<void>? initController;
   var isCameraReady = false;
 
   @override
   void initState() {
-    super.initState();
     initCamera();
     WidgetsBinding.instance.addObserver(this);
+    super.initState();
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    _controller.dispose();
     super.dispose();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      initController = _controller.initialize();
+      initController = myCameraController!.initialize();
     }
     if (!mounted) return;
     setState(() {
@@ -42,47 +39,37 @@ class CameraAppState extends State<CameraApp> with WidgetsBindingObserver {
     });
   }
 
-  Widget cameraWidget(context) {
-    var camera = _controller.value;
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     /// scale to fit the device size
-    var scale = size.width /
-        (size.height + MediaQuery.of(context).padding.top) *
-        camera.aspectRatio;
+    var scale = size.width / size.height * myCameraController!.value.aspectRatio;
     if (scale < 1) scale = 1 / scale;
-    return Align(
-      alignment: Alignment.center,
-      child: Transform.scale(
-        scale: scale,
-        child: CameraPreview(_controller),
-      ),
-    );
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: initController,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return cameraWidget(context);
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+    return Scaffold(
+      body: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Transform.scale(
+                scale: scale,
+                child: CameraPreview(myCameraController!),
+              ),
+            ),
+            const Align(
+              alignment: Alignment.center,
+              child: Text('tap to know',
+                style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 25),),
+            )
+          ]
+      ),
     );
   }
 
   Future<void> initCamera() async {
     WidgetsFlutterBinding.ensureInitialized();
-    final cameras = await availableCameras();
-    // get the back camera
-    final firstCamera = cameras.first;
-    _controller = CameraController(firstCamera, ResolutionPreset.high);
-    initController = _controller.initialize().then((value) {
+    initController = myCameraController!.initialize().then((value) {
       if (!mounted) return;
       setState(() {
         isCameraReady = true;
@@ -91,8 +78,7 @@ class CameraAppState extends State<CameraApp> with WidgetsBindingObserver {
   }
 
   Future<String> captureImage() async {
-    /// Capture an image and return its stored path
-    XFile file = await _controller.takePicture();
+    XFile file = await myCameraController!.takePicture();
     return file.path;
   }
 }

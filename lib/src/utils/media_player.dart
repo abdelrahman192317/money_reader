@@ -1,23 +1,16 @@
+import 'package:just_audio/just_audio.dart';
 
+String audioFile = "assets/cash_recognition/audio/";
 
-// import 'package:just_audio/just_audio.dart';
-//
-// class MediaPlayer {
-//   /// An AudioPlayer Widget that can be reused for different components
-//   ///
-//   /// To add more features for a component, inherit and override this class
-//   static final AudioPlayer _audioPlayer = AudioPlayer();
-//
-//   static Future playAudio(String path) async {
-//     // stop currently playing audios, if any
-//     await stopAudio();
-//     // play the audio from the given path
-//     await _audioPlayer.setAudioSource(AudioSource.asset(path))
-//         .then((value) => _audioPlayer.play());
-//   }
-//
-//   static stopAudio() {
-//     // stop a currently playing audio
-//     _audioPlayer.stop();
-//   }
-// }
+class MediaPlayer {
+  static final AudioPlayer _audioPlayer = AudioPlayer();
+
+  static Future playAudio(String name) async {
+    await stopAudio();
+    if(name.split(' ')[0] == 'new')name = name.split(' ')[1];
+    _audioPlayer.setAudioSource(AudioSource.asset('$audioFile$name.mp3'))
+        .then((value) => _audioPlayer.play());
+  }
+
+  static stopAudio() => _audioPlayer.stop();
+}

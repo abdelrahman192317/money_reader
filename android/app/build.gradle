@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.money_reader"
-    compileSdkVersion 31
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {

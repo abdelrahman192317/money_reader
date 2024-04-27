@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'src/home/home_screen.dart';
-import 'src/utils/routes/route_generator.dart';
-
+import 'package:money_reader/src/home/splash_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -13,11 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Render the Home Screen view
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: RouteGenerator.onGenerateRoute,
-      home: HomeScreen(),
+      title: 'Money Reader',
+      home: SplashScreen(),
     );
   }
 }
