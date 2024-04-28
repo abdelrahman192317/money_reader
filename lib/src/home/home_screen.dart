@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../cash_recognition/cash_camera.dart';
+import 'cash_camera.dart';
 import '../utils/global.dart';
 
 class HomeScreen extends StatefulWidget {

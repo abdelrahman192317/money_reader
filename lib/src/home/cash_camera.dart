@@ -1,12 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:money_reader/src/home/label_screen.dart';
 
-import 'package:money_reader/src/utils/camera.dart';
-
+import '../classifier/classifier.dart';
+import '../utils/camera.dart';
 import '../utils/media_player.dart';
-import 'classifier.dart';
 
 class CashCamera extends CameraApp {
   const CashCamera({super.key});
@@ -29,10 +25,8 @@ class CashCameraState extends CameraAppState {
                   if (output!.isNotEmpty) {
                     String result = output[0]["label"];
                     result = result.substring(2);
+                    if(result == 'default') result = 'wrong';
                     MediaPlayer.playAudio(result);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (ctx) =>
-                            LabelScreen(label: result, file: File(path))));
                   } else {
                     MediaPlayer.playAudio('wrong');
                   }

@@ -40,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: SpinKitFadingCircle(
+                color: Colors.pink,
                 size: size.height * 0.12,
               ),
             ),
@@ -53,9 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> initCameraController() async {
-    WidgetsFlutterBinding.ensureInitialized();
     final cameras = await availableCameras();
-    final firstCamera = cameras.first;    // get the back camera
-    myCameraController = CameraController(firstCamera, ResolutionPreset.high);
+    myCameraController = CameraController(cameras[0], ResolutionPreset.medium);
   }
 }

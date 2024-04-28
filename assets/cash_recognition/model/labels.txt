@@ -1,8 +1,9 @@
-0 ten
-1 twenty
-2 five
-3 new ten
-4 new twenty
-5 fifty
-6 hundred
-7 twoHundred
+0 five
+1 ten
+2 twenty
+3 fifty
+4 hundred
+5 twoHundred
+6 ten
+7 twenty
+8 default

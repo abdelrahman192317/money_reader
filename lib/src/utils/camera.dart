@@ -11,7 +11,6 @@ class CameraApp extends StatefulWidget {
 }
 
 class CameraAppState extends State<CameraApp> with WidgetsBindingObserver {
-  //late CameraController _controller;
   Future<void>? initController;
   var isCameraReady = false;
 
