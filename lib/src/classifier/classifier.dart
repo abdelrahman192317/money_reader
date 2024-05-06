@@ -5,6 +5,9 @@ String _labelPath = "assets/cash_recognition/model/labels.txt";
 
 class Classifier{
 
+  static Future<void> loadModel() async =>
+    await Tflite.loadModel(model: _modelPath, labels: _labelPath);
+
   static Future<List<dynamic>?> classifyImage(String imagePath) async {
 
     await Tflite.loadModel(model: _modelPath, labels: _labelPath);
