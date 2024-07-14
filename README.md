@@ -6,4 +6,4 @@ Flutter project with AI.
 
 ## App Demo
 
-<video controls src="test.mp4" title="APP"></video>
+<video src="test.mp4" title="APP"></video>
