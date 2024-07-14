@@ -6,4 +6,4 @@ Flutter project with AI.
 
 ## App Demo
 
-<video src="test.mp4" title="APP"></video>
+https://github.com/user-attachments/assets/696dcb77-72fc-4f95-afd1-8fb1a637285c
